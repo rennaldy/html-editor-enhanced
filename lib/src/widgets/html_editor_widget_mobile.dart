@@ -19,6 +19,7 @@ class HtmlEditorWidget extends StatefulWidget {
     Key? key,
     required this.controller,
     this.callbacks,
+    this.onKeydownScript,
     required this.plugins,
     required this.htmlEditorOptions,
     required this.htmlToolbarOptions,
@@ -31,6 +32,7 @@ class HtmlEditorWidget extends StatefulWidget {
   final HtmlEditorOptions htmlEditorOptions;
   final HtmlToolbarOptions htmlToolbarOptions;
   final OtherOptions otherOptions;
+  final String? onKeydownScript;
 
   @override
   _HtmlEditorWidgetMobileState createState() => _HtmlEditorWidgetMobileState();
@@ -238,6 +240,9 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                           onKeydown: function(e) {
                               var chars = \$(".note-editable").text();
                               var totalChars = chars.length;
+                              
+                              ${widget.onKeydownScript ?? ''}
+                              
                               ${widget.htmlEditorOptions.characterLimit != null ? '''allowedKeys = (
                                   e.which === 8 ||  /* BACKSPACE */
                                   e.which === 35 || /* END */
