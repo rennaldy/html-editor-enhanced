@@ -212,22 +212,24 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
 
                       /// this is a workaround so jumping between focus on different
                       /// editable elements still resizes the editor
-                      if ((cachedVisibleDecimal ?? 0) > 0.1) {
-                        this.setState(() {
-                          docHeight = widget.otherOptions.height *
-                              cachedVisibleDecimal!;
-                        });
-                        await setHeightJS();
-                      }
-                      var visibleDecimal = await visibleStream.stream.first;
-                      var newHeight = widget.otherOptions.height;
-                      if (visibleDecimal > 0.1) {
-                        this.setState(() {
-                          docHeight = newHeight * visibleDecimal;
-                        });
-                        //todo add support for traditional summernote controls again?
-                        await setHeightJS();
-                      }
+                      try {
+                        if ((cachedVisibleDecimal ?? 0) > 0.1) {
+                          this.setState(() {
+                            docHeight = widget.otherOptions.height *
+                                cachedVisibleDecimal!;
+                          });
+                          await setHeightJS();
+                        }
+                        var visibleDecimal = await visibleStream.stream.first;
+                        var newHeight = widget.otherOptions.height;
+                        if (visibleDecimal > 0.1) {
+                          this.setState(() {
+                            docHeight = newHeight * visibleDecimal;
+                          });
+                          //todo add support for traditional summernote controls again?
+                          await setHeightJS();
+                        }
+                      } catch (_) {}
                     }
                   },
                   onLoadStop:
