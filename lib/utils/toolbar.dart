@@ -5,12 +5,27 @@ abstract class Toolbar {
   const Toolbar();
 }
 
-/// Style group
-class StyleButtons extends Toolbar {
-  final bool style;
+class StyleTextButtons extends Toolbar {
+  final bool normal;
+  final bool quote;
+  final bool code;
+  final bool h1;
+  final bool h2;
+  final bool h3;
+  final bool h4;
+  final bool h5;
+  final bool h6;
 
-  const StyleButtons({
-    this.style = true,
+  const StyleTextButtons({
+    this.normal = true,
+    this.quote = false,
+    this.code = false,
+    this.h1 = false,
+    this.h2 = false,
+    this.h3 = false,
+    this.h4 = false,
+    this.h5 = false,
+    this.h6 = false,
   });
 }
 
